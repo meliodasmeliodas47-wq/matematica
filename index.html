@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#10130f">
+    <meta name="description" content="Explora una mazmorra, resuelve retos matemáticos y encuentra la runa correcta en una aventura arcade.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+    <title>Runas & Ruinas — aventura matemática</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/game.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Runas y Ruinas, inicio">
+          <span class="brand-emblem" aria-hidden="true">R<span>✳</span></span>
+          <span class="brand-name">RUNAS <i>&</i> RUINAS</span>
+        </a>
+        <span class="topbar-caption"><span class="status-dot"></span> AVENTURA ARCADE DE MATEMÁTICAS</span>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="Silenciar sonido" aria-pressed="false">🔊</button>
+        <button class="install-button" id="install-button" type="button" hidden>INSTALAR JUEGO</button>
+      </header>
+
+      <section class="screen welcome-screen" id="welcome-screen" aria-labelledby="welcome-title">
+        <div class="hero">
+          <p class="eyebrow"><span class="eyebrow-line"></span> CRÓNICAS DEL REINO DE NUMERIA</p>
+          <h1 id="welcome-title">La mazmorra<br>de los <span>números.</span></h1>
+          <p class="hero-copy">Un antiguo dragón ha robado las runas del reino. Entra a las ruinas, encuentra la respuesta y vuelve a casa con el tesoro.</p>
+          <div class="hero-meta">
+            <span><b>01</b> EXPLORA</span><span><b>02</b> RESUELVE</span><span><b>03</b> SOBREVIVE</span>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="hero-sun"></div>
+            <div class="hero-mountain mountain-back"></div>
+            <div class="hero-mountain mountain-front"></div>
+            <div class="hero-arch"><span>✳</span></div>
+            <div class="hero-figure">♟</div>
+            <span class="hero-art-label">RUINAS DE VELARIA · NIVEL 01</span>
+          </div>
+        </div>
+
+        <div class="setup-panel">
+          <div class="setup-heading">
+            <div>
+              <p class="eyebrow">PREPARA TU AVENTURA</p>
+              <h2>Elige tu camino</h2>
+            </div>
+            <span class="setup-number">01 <i>/ 03</i></span>
+          </div>
+
+          <div class="mode-grid" role="group" aria-label="Elige una misión">
+            <button class="mode-card selected" type="button" data-mode="equations" aria-pressed="true">
+              <span class="mode-glyph">x</span><span class="mode-name">El sello algebraico</span><span class="mode-detail">Ecuaciones de primer grado</span><span class="mode-arrow">↗</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="mental" aria-pressed="false">
+              <span class="mode-glyph">＋</span><span class="mode-name">Prueba del ingenio</span><span class="mode-detail">Cálculo mental</span><span class="mode-arrow">↗</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="fractions" aria-pressed="false">
+              <span class="mode-glyph">½</span><span class="mode-name">Cámara de partes</span><span class="mode-detail">Fracciones</span><span class="mode-arrow">↗</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="powers" aria-pressed="false">
+              <span class="mode-glyph">²</span><span class="mode-name">Poder ancestral</span><span class="mode-detail">Potencias</span><span class="mode-arrow">↗</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="percentages" aria-pressed="false">
+              <span class="mode-glyph">%</span><span class="mode-name">Mercado del reino</span><span class="mode-detail">Porcentajes</span><span class="mode-arrow">↗</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="order" aria-pressed="false">
+              <span class="mode-glyph">()</span><span class="mode-name">Puerta encantada</span><span class="mode-detail">Orden de operaciones</span><span class="mode-arrow">↗</span>
+            </button>
+          </div>
+
+          <fieldset class="difficulty-picker">
+            <legend>Elige la dificultad</legend>
+            <label><input type="radio" name="difficulty" value="easy" checked><span>Aprendiz</span></label>
+            <label><input type="radio" name="difficulty" value="medium"><span>Aventurero</span></label>
+            <label><input type="radio" name="difficulty" value="hard"><span>Maestro</span></label>
+          </fieldset>
+
+          <div class="mission-picker">
+            <label for="mission-select">Tipo de misión</label>
+            <select id="mission-select" aria-label="Selecciona el tipo de misión">
+              <option value="story">Historia</option>
+              <option value="boss">Jefe final</option>
+              <option value="arcade">Arcade</option>
+            </select>
+          </div>
+
+          <button class="start-button" id="start-button" type="button">
+            <span>ENTRAR A LA MAZMORRA</span><span class="button-arrow">→</span>
+          </button>
+          <p class="setup-footnote"><span>✦</span> Teclado o controles táctiles · encuentra la runa · evita a los limos</p>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="game-screen" aria-labelledby="game-mode-label" hidden>
+        <div class="game-header">
+          <button class="back-button" id="home-button" type="button"><span>←</span> SALIR DE LA MAZMORRA</button>
+          <div class="game-title-group">
+            <span class="game-kicker">EXPEDICIÓN ACTIVA</span>
+            <h1 id="game-mode-label">EL SELLO ALGEBRAICO</h1>
+          </div>
+          <div class="game-level"><span class="level-gem">✦</span> <span id="difficulty-label">APRENDIZ</span></div>
+        </div>
+
+        <div class="game-layout">
+          <section class="dungeon-panel" aria-label="Tablero de juego">
+            <div class="dungeon-hud">
+              <div class="hud-chapter"><span class="hud-icon">⌘</span><div><small>CÁMARA</small><strong id="round-label">01 <i>/ 10</i></strong></div></div>
+              <div class="hud-question"><small>RESUELVE PARA ABRIR EL COFRE</small><strong id="question">3x + 4 = 19</strong></div>
+              <div class="hud-vitals"><small>ENERGÍA</small><div class="hearts" id="lives" aria-label="3 vidas"><span>♥</span><span>♥</span><span>♥</span></div><button class="pause-button" id="pause-button" type="button" aria-label="Pausar juego" aria-keyshortcuts="P Escape">Ⅱ</button></div>
+            </div>
+
+            <div class="dungeon-canvas-wrap">
+              <canvas class="dungeon-canvas" id="dungeon-canvas" width="800" height="500" tabindex="0" role="img" aria-label="Mazmorra interactiva. Usa las flechas o W, A, S, D para mover al aventurero y tocar la runa correcta.">
+                Tu navegador no puede mostrar el tablero del juego. Actualiza el navegador para jugar.
+              </canvas>
+              <div class="canvas-message" id="canvas-message" aria-live="polite">BUSCA LA RUNA CORRECTA</div>
+              <div class="pause-overlay" id="pause-overlay" hidden>
+                <div class="pause-card">
+                  <span class="pause-symbol" aria-hidden="true">Ⅱ</span>
+                  <p class="eyebrow">EXPEDICIÓN EN PAUSA</p>
+                  <h2>El reino puede esperar.</h2>
+                  <p>Respira, aventurero. Tu cámara te espera justo donde la dejaste.</p>
+                  <button class="start-button" id="resume-button" type="button"><span>SEGUIR EXPLORANDO</span><span class="button-arrow">→</span></button>
+                  <button class="back-button" id="pause-home-button" type="button">← VOLVER A LAS MISIONES</button>
+                </div>
+              </div>
+              <div class="pause-overlay" id="level-overlay" hidden>
+                <div class="pause-card">
+                  <span class="pause-symbol" aria-hidden="true">✦</span>
+                  <p class="eyebrow">NIVEL COMPLETADO</p>
+                  <h2 id="level-title">¡La cámara ha sido despejada!</h2>
+                  <p id="level-copy">Las ruinas respiran mejor y aparecen nuevos limos debajo del polvo.</p>
+                  <button class="start-button" id="next-level-button" type="button"><span>AVANZAR AL SIGUIENTE NIVEL</span><span class="button-arrow">→</span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dungeon-footer">
+              <div class="progress-info"><span>PROGRESO DE LA EXPEDICIÓN</span><strong id="progress-count">0%</strong></div>
+              <div class="progress-track" role="progressbar" aria-label="Progreso de la expedición" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-fill"></span></div>
+              <div class="control-hint"><span>CONTROLES</span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><i>o</i><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div>
+            </div>
+            <div class="touch-controls" aria-label="Controles táctiles">
+              <div class="touch-controls-row"><button type="button" data-direction="up" aria-label="Mover arriba">▲</button></div>
+              <div class="touch-controls-row"><button type="button" data-direction="left" aria-label="Mover izquierda">◀</button><button type="button" data-direction="down" aria-label="Mover abajo">▼</button><button type="button" data-direction="right" aria-label="Mover derecha">▶</button></div>
+            </div>
+          </section>
+
+          <aside class="side-panel" aria-label="Estado de la aventura">
+            <div class="relic-card">
+              <div class="relic-top"><span>BOTÍN</span><span class="relic-spark">✧</span></div>
+              <div class="relic-icon" aria-hidden="true">⬡</div>
+              <strong id="score-value">0000</strong>
+              <span>MONEDAS DE ORO</span>
+            </div>
+            <div class="combo-card"><span class="combo-fire">✷</span><div><small>RACHA</small><strong id="streak-value">0 <i>aciertos</i></strong></div></div>
+            <div class="guide-card">
+              <span class="guide-symbol">✦</span>
+              <div>
+                <strong>CONSEJO DEL SABIO</strong>
+                <p id="guide-message">Muévete por la cámara. Toca la runa con la respuesta correcta.</p>
+                <p class="power-status" id="power-status">Sin mejoras activas</p>
+              </div>
+            </div>
+            <button class="hint-button" id="hint-button" type="button"><span>☼</span> Usar una pista <small>−10 oro</small></button>
+            <button class="abandon-button" id="skip-button" type="button">Abandonar expedición</button>
+            <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+        <div class="result-card">
+          <div class="result-seal" id="result-emoji" aria-hidden="true">✦</div>
+          <p class="eyebrow" id="result-eyebrow">CRÓNICA DE LA EXPEDICIÓN</p>
+          <h1 id="result-title">¡La aventura continúa!</h1>
+          <p class="result-copy" id="result-copy">Tu viaje por las ruinas ha terminado.</p>
+          <div class="result-stats">
+            <div><strong id="final-score">0</strong><span>ORO REUNIDO</span></div>
+            <div><strong id="final-correct">0/10</strong><span>RUNAS ENCONTRADAS</span></div>
+          </div>
+          <p class="result-badge" id="result-badge">NUEVO EXPLORADOR</p>
+          <p class="result-streak" id="result-streak">Mejor racha: 0</p>
+          <button class="start-button" id="play-again-button" type="button"><span>VOLVER A EXPLORAR</span><span class="button-arrow">↻</span></button>
+          <button class="back-button result-home-button" id="result-home-button" type="button">← ELEGIR OTRA AVENTURA</button>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>RUNAS & RUINAS <i>·</i> UNA AVENTURA PARA MENTES VALIENTES</span>
+        <span>CREADO PARA EXPLORAR <b>✳</b></span>
+      </footer>
+    </main>
+  </body>
+</html>

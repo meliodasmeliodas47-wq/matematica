@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Runas & Ruinas — aventura matemática",
+  "short_name": "Runas & Ruinas",
+  "description": "Explora mazmorras, resuelve retos y encuentra las runas correctas.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#10130f",
+  "theme_color": "#10130f",
+  "icons": [
+    {
+      "src": "assets/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
